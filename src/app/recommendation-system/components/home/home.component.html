@@ -1,0 +1,61 @@
+<div class="row mb-3">
+    <div class="col-md-6">
+        <label><strong>Buscar</strong></label>
+        <div class="input-group">
+            <div class="input-group-addon">                
+                <button class="btn btn-outline-secondary" type="button">
+                    <nb-icon icon="search-outline"></nb-icon>
+                </button>
+            </div>
+            <input type="text" #searchRef class="form-control" placeholder="Buscar Documentos">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label><strong>Semestre</strong></label>
+        <select [(ngModel)]="semester" class="form-control float-right" (change)="getDocumentsByStatus()">
+            <option [value]="0">Ninguno</option>
+            <option [value]="1">Primer</option>
+            <option [value]="2">Segundo</option>
+            <option [value]="3">Tercer</option>
+            <option [value]="4">Cuarto</option>
+            <option [value]="5">Quinto</option>
+            <option [value]="6">Sexto</option>
+            <option [value]="7">Septimo</option>
+            <option [value]="8">Octavo</option>
+            <option [value]="9">Noveno</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label><strong>Materia</strong></label>
+        <select [(ngModel)]="subject" class="form-control" (change)="getDocumentsByStatus()">
+            <option [value]="0">Ninguno</option>
+            <option *ngFor="let subject of subjects.data" [value]="subject.id">
+                {{subject.attributes.name}}
+            </option>
+        </select>
+    </div>
+</div>
+<div *ngIf="documents.length == 0 && searchIsEmpty == false" class="alert alert-primary text-center mb-0" role="alert">
+    <strong>La búsqueda no generó resultados.</strong>
+</div>
+<div *ngIf="documents.length == 0" class="alert alert-primary text-center mb-0" role="alert">
+    <strong>No existe documentos registrados.</strong>
+</div>
+<div class="row">
+    <div *ngFor="let document of documents" class="col-md-3 pb-3">
+        <div class="card card-style text-righ" (click)="view(document.attributes.link)">
+            <div class="card-image">
+                <img class="card-img-top"
+                    [src]="document.attributes['link-image'] ? document.attributes['link-image'] : '../../../../assets/images/not-found.png'"
+                    onerror="this.src='../../../../assets/images/not-found.png'" alt="Not Found!">
+            </div>
+            <div class="card-body">
+                <h5>{{document.attributes.name}}</h5>
+                <strong> Materia: {{document.relationships.subject.data.attributes.name}}<br>
+                    Docente: {{document.relationships.subject.data.attributes.docente}}<br>
+                </strong>
+                {{document.attributes.description}}
+            </div>
+        </div>
+    </div>
+</div>

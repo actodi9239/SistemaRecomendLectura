@@ -1,0 +1,108 @@
+.upload {
+  text-align: right;
+  margin: auto 0;
+  &__link {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #aaaaaa;
+  }
+}
+.icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+.logo {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin: 0 1rem;
+  &__img {
+    display: inline;
+    text-align: center;
+    color: #f2f2f2;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    box-shadow: 2px 2px 10px #c2c2c2;
+    padding: 10px;
+    margin-right: 10px;
+    background-color: #5280c5;
+    transition: background-color linear 0.3s;
+    &:hover {
+      background-color: #fff;
+      color: #5280c5;
+    }
+  }
+  &__link {
+    font-weight: bold;
+  }
+}
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  width: auto;
+
+  button {
+    font-size: 24px;
+  }
+
+  .navigation {
+    padding-right: 1.25rem;
+    font-size: 2.5rem;
+    text-decoration: none;
+
+    i {
+      display: block;
+    }
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: #004085;
+
+  .dropdown-item {
+    color: #ffffff;
+  }
+
+  .dropdown-item:hover {
+    color: #004085;
+    background-color: #cce5ff;
+  }
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: #004085;
+  border-color: #004085;
+}
+
+.col-left {
+  float: left;
+  width: 30%;
+  text-align: left;
+}
+
+.col-right {
+  float: left;
+  width: 70%;
+  text-align: right;
+}
+
+@media (min-width: 320px) and (max-width: 450px) {
+  .upload {
+    width: 200vw;
+  }
+
+  .dropdown {
+    width: 20vw;
+  }
+}

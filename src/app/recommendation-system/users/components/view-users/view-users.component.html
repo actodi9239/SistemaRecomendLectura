@@ -1,0 +1,23 @@
+<nb-card [nbSpinner]="isLoading" nbSpinnerMessage="Cargando...">
+    <nb-card-header>
+        <div class="card" style="border: none;">
+            <span>Lista de usuarios</span>
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 card-body">
+                    <label class="checkbox-inline px-3"><input type="checkbox" [(ngModel)]="admin"
+                            (change)="rolesValueChange('Admin', admin)" class="mr-2">Admin</label>
+                    <label class="checkbox-inline px-3"><input type="checkbox" [(ngModel)]="moderator"
+                            (change)="rolesValueChange('Moderator', moderator)" class="mr-2">Moderador</label>
+                    <label class="checkbox-inline px-3"><input type="checkbox" [(ngModel)]="student"
+                            (change)="rolesValueChange('Student', student)" class="mr-2">Estudiante</label>
+                </div>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-balham" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [rowData]="users" [frameworkComponents]="frameworkComponents">
+        </ag-grid-angular>
+    </nb-card-body>
+</nb-card>

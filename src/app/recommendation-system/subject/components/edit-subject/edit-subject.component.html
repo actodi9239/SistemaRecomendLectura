@@ -1,0 +1,45 @@
+<nb-card [nbSpinner]="isLoading" nbSpinnerMessage="Cargando...">
+    <nb-card-header>
+        <span *ngIf="subjectToEdit != null">Editar Materia</span>
+        <span *ngIf="subjectToEdit == null">Agregar Materia</span>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="subjectEditorForm" (ngSubmit)="addSubject()">
+            <label class="font-italic mb-3">Los campos marcados con * son obligatorios.</label>
+            <div class="form-group">
+                <label><strong>Nombre*</strong></label>
+                <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert text-danger">
+                    <div *ngIf="name.errors.required">
+                        El nombre de la materia es requerido.
+                    </div>
+                    <div *ngIf="name.errors.maxlength">
+                        El nombre debe tener máximo 70 caracteres.
+                    </div>
+                    <div *ngIf="name.errors.pattern">
+                        El campo no acepta caracteres especiales.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><strong>Docente*</strong></label>
+                <input type="text" class="form-control" placeholder="Docente" formControlName="docente">
+                <div *ngIf="docente.invalid && (docente.dirty || docente.touched)" class="alert text-danger">
+                    <div *ngIf="docente.errors.required">
+                        El docente es requerido.
+                    </div>
+                    <div *ngIf="docente.errors.maxlength">
+                        El docente debe tener máximo 70 caracteres.
+                    </div>
+                    <div *ngIf="docente.errors.pattern">
+                        El campo no acepta caracteres especiales.
+                    </div>
+                </div>
+            </div>
+            <button type="submit" [disabled]="!subjectEditorForm.valid" class="btn btn-primary">
+                <span *ngIf="subjectToEdit != null">Actualizar</span>
+                <span *ngIf="subjectToEdit == null">Registrar</span>
+            </button>
+        </form>
+    </nb-card-body>
+</nb-card>

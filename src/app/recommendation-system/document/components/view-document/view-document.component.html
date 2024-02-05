@@ -1,0 +1,16 @@
+<div [nbSpinner]="isLoading" nbSpinnerMessage="Cargando...">
+    <nb-card>
+      <nb-card-header>
+        <span>Lista de Sugerencias</span>
+      </nb-card-header>
+      <nb-card-body>
+        <div *ngIf="documents.length == 0" class="alert alert-primary text-center" role="alert">
+          <strong>No existen Sugerencias registradas.</strong>
+        </div>
+        <ag-grid-angular *ngIf="documents.length > 0" style="width: 100%; height: 100%;" class="ag-theme-balham"
+          [gridOptions]="gridOptions" [columnDefs]="columnDefs" [rowData]="documents"
+          [frameworkComponents]="frameworkComponents">
+        </ag-grid-angular>
+      </nb-card-body>
+    </nb-card>
+  </div>

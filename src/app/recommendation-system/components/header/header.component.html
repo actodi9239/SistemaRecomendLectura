@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="header-container col-left ">
+        <a *ngIf="user" (click)="toggleSidebar()" class="navigation">
+            <nb-icon icon="menu-outline"></nb-icon>
+        </a>
+        <div class="logo">
+            <a routerLink="" class="logo__img">
+                <i class="fas fa-book-reader"></i>
+            </a>
+            <a routerLink="" class="logo__link">SRAA </a>
+        </div>
+    </div>
+    <div class="nav col-right">
+        <div class="upload" *ngIf="login">
+            <a [routerLink]="['/documents/redirect-to-document']" class="upload__link">
+                <i class="fas fa-cloud-upload-alt"></i>
+                Subir
+            </a>
+        </div>
+        <div class="dropdown" *ngIf="login">
+            <button class="btn btn-primary dropdown-toggle header-container float-right" type="button"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{username}}
+                <nb-icon icon="person-outline" class="ml-2"></nb-icon>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" (click)="changePassword()">Change Password</button>
+                <button class="dropdown-item" (click)="editProfile()">Edit Profile</button>
+                <button class="dropdown-item" (click)="logout()">Log out</button>
+            </div>
+        </div>
+    </div>
+</div>

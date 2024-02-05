@@ -1,0 +1,105 @@
+<div class="col-md-8">
+    <nb-card [nbSpinner]="isLoading" nbSpinnerMessage="Cargando...">
+        <nb-card-header>
+            <span>Sugerir Documento</span>
+        </nb-card-header>
+        <nb-card-body>
+            <form [formGroup]="documentEditorForm" (ngSubmit)="addDocument()">
+                <label class="font-italic mb-3">Los campos marcados con * son obligatorios.</label>
+                <div class="form-group">
+                    <label><strong>Nombre*</strong></label>
+                    <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert text-danger">
+                        <div *ngIf="name.errors.required">
+                            El nombre del documento es requerido.
+                        </div>
+                        <div *ngIf="name.errors.maxlength">
+                            El nombre debe tener máximo 36 caracteres.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Descripción*</strong></label>
+                    <input type="text" class="form-control" placeholder="Descripción" formControlName="description">
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                        class="alert text-danger">
+                        <div *ngIf="description.errors.required">
+                            La Descripción del documento es requerido.
+                        </div>
+                        <div *ngIf="description.errors.maxlength">
+                            El Descripción debe tener máximo 36 caracteres.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><strong>Materia*</strong></label>
+                            <select class="form-control" formControlName="subjectId">
+                                <option *ngFor="let subject of subjects.data" [value]="subject.id">
+                                    {{subject.attributes.name}}-{{subject.attributes.docente}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><strong>Semestre*</strong></label>
+                            <select class="form-control" formControlName="semester">
+                                <option [value]="1">Primer</option>
+                                <option [value]="2">Segundo</option>
+                                <option [value]="3">Tercer</option>
+                                <option [value]="4">Cuarto</option>
+                                <option [value]="5">Quinto</option>
+                                <option [value]="6">Sexto</option>
+                                <option [value]="7">Septimo</option>
+                                <option [value]="8">Octavo</option>
+                                <option [value]="9">Noveno</option>
+                            </select>
+                            <div *ngIf="semester.invalid && (semester.dirty || semester.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="semester.errors.required">
+                                    El tipo de entrada es requerida.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Link*</strong></label>
+                    <input type="link" class="form-control" placeholder="link" formControlName="link">
+                    <div *ngIf="link.invalid && (link.dirty || link.touched)" class="alert text-danger">
+                        <div *ngIf="link.errors.required">
+                            El Link es requerido.
+                        </div>
+                        <div *ngIf="link.errors.pattern">
+                            El Link es invalido.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><strong>Miniatura*</strong><label class="font-italic mb-3">(Tamaño maximo: 1 Mb -
+                            Formatos:
+                            .png, .jpg y .jpeg.)</label></label><br />
+                    <div *ngIf="thumbnailDataImage">
+                        <img *ngIf="thumbnailDataImage" [src]="thumbnailDataImage" height="200"><br /><br />
+                    </div>
+                    <div *ngIf="imageErrorSize">
+                        <div class="alert text-danger">{{imageErrorSize}}</div>
+                    </div>
+                    <input style="display: none" type="file" accept=".png, .jpg, .jpeg" onclick="this.value = null"
+                        (change)="onFileChangeImage($event)" #fileInputImage>
+                    <button type="button" (click)="fileInputImage.click()"
+                        class="btn btn-secondary btn-sm mr-1">Seleccionar
+                        imagen</button>
+                    <button *ngIf="thumbnailDataImage" type="button" (click)="removeImage()"
+                        class="btn btn-secondary btn-sm">Remover
+                        imagen</button>
+                </div>
+                <button type="submit" [disabled]="!documentEditorForm.valid" class="btn btn-primary">
+                    <span *ngIf="docummentToEdit == null">Subir</span>
+                </button>
+            </form>
+        </nb-card-body>
+    </nb-card>
+</div>

@@ -1,0 +1,136 @@
+<div class="row" style="padding-top: 5%;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <nb-card [nbSpinner]="isLoading" nbSpinnerMessage="Loading...">
+            <nb-card-header>
+                <h1><strong>Registrate</strong></h1>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="userEditorForm" (ngSubmit)="addUser()">
+                    <label class="font-italic mb-3">Los campos marcados con * son obligatorios.</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong>Nombre*</strong></label>
+                                <input type="text" class="form-control" placeholder="Nombre"
+                                    formControlName="firstName">
+                            </div>
+                            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="firstName.errors.required">
+                                    - El nombre es requerido.
+                                </div>
+                                <div *ngIf="firstName.errors.maxlength">
+                                    - El nombre debe contener maximo 100 caracteres.
+                                </div>
+                                <div *ngIf="firstName.errors.minlength">
+                                    - El nombre de contener al menos 3 caracteres.
+                                </div>
+                                <div *ngIf="firstName.errors.pattern">
+                                    - El nombre solo puede contener letras.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong>Apellido*</strong></label>
+                                <input type="text" class="form-control" placeholder="Apellido"
+                                    formControlName="lastName">
+                            </div>
+                            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="lastName.errors.required">
+                                    - El apellido es requerido.
+                                </div>
+                                <div *ngIf="lastName.errors.maxlength">
+                                    - El apellido debe contener maximo 100 caracteres.
+                                </div>
+                                <div *ngIf="lastName.errors.minlength">
+                                    - El apellido de contener al menos 3 caracteres.
+                                </div>
+                                <div *ngIf="lastName.errors.pattern">
+                                    - El apellido solo puede contener letras.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong>Email*</strong></label>
+                                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert text-danger">
+                                    <div *ngIf="email.errors.required">
+                                        - El Email es requerido.
+                                    </div>
+                                    <div *ngIf="email.errors.pattern">
+                                        - El Email es invalido.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong>Nombre de usario publico*</strong></label>
+                                <input type="text" class="form-control" placeholder="Nick Name"
+                                    formControlName="nickName">
+                            </div>
+                            <div *ngIf="nickName.invalid && (nickName.dirty || nickName.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="nickName.errors.required">
+                                    - El usuario es requerido.
+                                </div>
+                                <div *ngIf="nickName.errors.maxlength">
+                                    - El usuario debe contener maximo 100 caracteres.
+                                </div>
+                                <div *ngIf="nickName.errors.minlength">
+                                    - El usuario de contener al menos 3 caracteres.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><strong>Contraseña*</strong></label>
+                                <input type="password" class="form-control" placeholder="Contraseña"
+                                    formControlName="password">
+                                <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)" class="alert text-danger">
+                                    <div *ngIf="password.errors.required">
+                                        - La contraseña es requerida.
+                                    </div>
+                                    <div *ngIf="password.errors.maxlength">
+                                        - La contraseña debe tener máximo 100 caracteres.
+                                    </div>
+                                    <div *ngIf="password.errors.minlength">
+                                        - La contraseña debe tener al menos 6 caracteres.
+                                    </div>
+
+                                    <div *ngIf="password.errors.pattern">
+                                        - La contraseña debe tener al menos una letra MAYUSCULA y una letra minuscula.
+                                        - Solo se aceptan los siguientes carateres especiales: !$%@#£.,""~`€*?&'><
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="confirmPassword"><strong>Confirmar contraseña*</strong></label>
+                                <input id="confirmPassword" type="password" class="form-control"
+                                    [ngClass]="{'is-invalid':userEditorForm.get('confirmPassword').errors && userEditorForm.get('confirmPassword').touched}"
+                                    formControlName="confirmPassword">
+                                <div class="invalid-feedback"
+                                    *ngIf="userEditorForm.get('confirmPassword').hasError('passwordMismatch')">
+                                    - Las contraseñas no coinciden.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="send">
+                        <button type="submit" [disabled]="!userEditorForm.valid"
+                            class="btn btn-primary">Registrate</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

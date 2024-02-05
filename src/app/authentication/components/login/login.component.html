@@ -1,0 +1,53 @@
+<nb-layout>
+    <nb-layout-column>
+        <nb-card [nbSpinner]="isLoading" nbSpinnerMessage="Loading...">
+            <nb-card-body>
+                <div class="auth-block mt-25">
+                    <div class="text-center mb-5">
+                        <h1 id="title" class="title">Login</h1>
+                        <p class="sub-title">Hello! Login with your email and password.</p>
+                    </div>
+                    <div *ngIf="errorMessage" class="alert alert-primary" role="alert">
+                        {{errorMessage}}
+                    </div>
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="form-group mb-4">
+                            <label class="label"><strong>Email</strong></label>
+                            <input type="text" #userFocus class="form-control" placeholder="Email"
+                                formControlName="username" autofocus>
+                            <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="username.errors.required">
+                                    The username is required.
+                                </div>
+                                <div *ngIf="username.errors.maxlength">
+                                    The username must have a maximum of 100 characters.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-5">
+                            <label class="label"><strong>Password</strong></label>
+                            <input type="password" class="form-control" placeholder="Password"
+                                formControlName="password">
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="password.errors.required">
+                                    The password is required.
+                                </div>
+                                <div *ngIf="password.errors.maxlength">
+                                    The password must have a maximum of 100 characters.
+                                </div>
+                            </div>
+                        </div>
+                        <button nbButton fullWidth status="success" style="background-color: #1E6AC9; color:white" [disabled]="!loginForm.valid">
+                            Login
+                        </button>
+                        <div class = "py-3">
+                            <strong>¿No tienes Cuenta? <a routerLink = "/users/register" style="color: #003F8D;">Crear Cuenta</a></strong>
+                        </div>
+                    </form>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </nb-layout-column>
+</nb-layout>
